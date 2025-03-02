@@ -1,0 +1,21 @@
+* {
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+}
+
+body{
+    /* background-image: url('./assets/appBackground.png'); */
+    background-repeat: no-repeat;
+}
+
+:root {
+    --primary-text: white;
+    --secondary-text : #f5f5f5;
+    --primary-background: #f86300;
+    --primary-dark-background: #03056B;
+    --secondry-gray :  rgb(185, 181, 181);
+
+    
+}
+
