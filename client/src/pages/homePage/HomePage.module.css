@@ -59,7 +59,9 @@
 .hotelName {
 	color: var(--primary-link-text);
 	font-size: 23px;
+	cursor: pointer;
 }
+
 
 .hotelCity {
 	margin-left: 20px;
@@ -67,7 +69,10 @@
 
 .hotelPrice {
 	text-align: right;
-	color: var(--primary-link-text);
+}
+
+.availabilityBtn {
+	text-align: right;
 }
 
 
