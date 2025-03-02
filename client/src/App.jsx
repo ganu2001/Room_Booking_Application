@@ -5,8 +5,9 @@ import { SignupPage } from './pages/signupPage/SignupPage'
 import { Layout } from './components/layout/Layout'
 import { HomePage } from './pages/homePage/HomePage'
 import { useEffect } from 'react'
-import { isLoggedIn } from './utils/helperFunctions'
+import { isAdminLoggedIn, isLoggedIn } from './utils/helperFunctions'
 import { HotelInforPage } from './pages/hotelInforPage/HotelInforPage'
+import { AdminViewPage } from './pages/adminViewPage/AdminViewPage'
 
 function App() {
 
@@ -32,6 +33,12 @@ function App() {
             <Route path='/hotel/:hotelId' element={
               <Protected>
                 <HotelInforPage />
+              </Protected>}
+            />
+
+            <Route path='/adminView' element={
+              <Protected>
+                <AdminViewPage />
               </Protected>}
             />
         </Route>

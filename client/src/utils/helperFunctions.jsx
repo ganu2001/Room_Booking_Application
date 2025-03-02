@@ -8,3 +8,13 @@ export const isLoggedIn = () => {
         return false;
     }
 }
+
+export const isAdminLoggedIn = () => {
+    const accessToken = Cookies.get("userId");
+    const userRole = Cookies.get("role");
+    if (accessToken && userRole == "admin") {
+        return true;
+    } else {
+        return false;
+    }
+}

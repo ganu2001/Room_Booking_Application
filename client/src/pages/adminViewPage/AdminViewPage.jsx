@@ -1,15 +1,19 @@
 import React, { useEffect, useState } from 'react'
-import styles from './HomePage.module.css'
+import styles from './AdminViewPage.module.css'
 import { getHotelsList } from '../../services/api';
-import { IoLocationOutline } from "react-icons/io5";
-import {CustomButton} from '../../components/reusableComponents/customButton/CustomButton';
+import { IoLocationOutline } from 'react-icons/io5';
+import { CustomButton } from '../../components/reusableComponents/customButton/CustomButton';
 import { useNavigate } from 'react-router';
+import Cookies from 'js-cookie'
+import { toast } from 'react-toastify';
+import { UpdateHotel } from '../../modals/updateHotel/UpdateHotel';
 
-export const HomePage = () => {
-
+export const AdminViewPage = () => {
 	const [hotelData, setHotelData] = useState([]);
-	const navigate = useNavigate();
 	const [serachQuery, setSearchQuery] = useState("");
+	const [particlarHotelData, setParticlarHotelData] = useState()
+	const [updateHotelOpen, setUpdateHotelOpen] = useState(false)
+	const navigate = useNavigate();
 
 	const getHostelList = async(queryString) => {
 		try {
@@ -25,12 +29,19 @@ export const HomePage = () => {
 		getHostelList(e.target.value);
 	} 
 
-	const handleViewHotel = (hotelId) => {
-		navigate(`/hotel/${hotelId}`)
+	const handleHotelUpdate = (hotel) => {
+		setParticlarHotelData(hotel);
+		setUpdateHotelOpen(true);
 	}
 
 	useEffect(() => {
-		getHostelList();
+		if(Cookies.get("role") != "admin") {
+			toast.info("Admin access required");
+			navigate('/');
+		}
+		else {
+			getHostelList();
+		}
 	}, [])
 
 	return (
@@ -50,14 +61,17 @@ export const HomePage = () => {
 						<div className={styles.hotelDataContainer}>
 							<div className={styles.bannerImgContainer}><img src={hotel?.hotel_images[0]} alt="image" className={styles.hotelBannerImg} /></div>
 							<div className={styles.hotelInfoContainer}>
-								<div className={`${styles.hotelName} ${styles.infodiv}`} onClick={() => handleViewHotel(hotel._id)}>{hotel?.name}</div>
+								<div className={`${styles.hotelName} ${styles.infodiv}`} >{hotel?.name}</div>
 								<div className={`${styles.hotelAddress} ${styles.infodiv}`}>
 									<IoLocationOutline style={{color: 'black'}}/>
 									{hotel?.address}
 								</div>
 								<div className={`${styles.hotelCity} ${styles.infodiv}`}>{hotel?.city}</div>
 								<div className={`${styles.hotelPrice} ${styles.infodiv}`}>Prices starting from {hotel?.non_ac_room_price ? hotel?.non_ac_room_price : hotel?.ac_room_price}</div>
-								<div className={`${styles.availabilityBtn} ${styles.infodiv}`}><CustomButton text='Check availability' onClick={() => handleViewHotel(hotel?._id)} /></div>
+								<div className={`${styles.handlehotelDiv} ${styles.infodiv}`}>
+									<CustomButton text='Update' onClick={() => handleHotelUpdate(hotel)} />
+									<CustomButton text='Delete' isFilled={true} />
+								</div>
 							</div>
 						</div>
 					))}
@@ -65,6 +79,12 @@ export const HomePage = () => {
 			}
 		</div>
 
+		<UpdateHotel
+			isOpen={updateHotelOpen}
+			setIsOpen={setUpdateHotelOpen}
+			hotelData={particlarHotelData}
+		/>
+
 	</div>
-	)
+  )
 }
