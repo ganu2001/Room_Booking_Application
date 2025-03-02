@@ -1,0 +1,54 @@
+.homePageContainer {
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+}
+
+.searchContainer {
+	width: 100%;
+	text-align: center;
+	margin: 20px 0px;
+}
+
+.serachInput {
+	width: 70%;
+	padding: 10px;
+	border-radius: 15px;
+	outline: none;
+	border: 1px solid rgb(152, 149, 149);
+	font-size: 17px;
+}
+
+
+.hotelListContainer {
+	margin: 10px 0px;
+}
+
+.hotelBannerImg {
+	width: 20%;
+	height: 300px;
+}
+
+
+/* {
+	"_id": "67c32155d5caed675bd6a7ca",
+	"name": "Vivanta Hyderabad, Begumpet",
+	"address": "1-10-147 & 148, Mayuri Marg, Mayur Marg, Begumpet, Hyderabad, Telangana 500016",
+	"city": "Hyderabad",
+	"state": "Telangana",
+	"mobile": "4067252626",
+	"ac_rooms": 20,
+	"non_ac_rooms": 10,
+	"banquet_hall_available": true,
+	"hotel_images": [
+		"https://res.cloudinary.com/dosymlwpq/image/upload/v1740841199/Vivanta_Hyderabad_6_qo9byn.jpg",
+		"https://res.cloudinary.com/dosymlwpq/image/upload/v1740841199/Vivanta_Hyderabad_5_n8oioa.jpg",
+		"https://res.cloudinary.com/dosymlwpq/image/upload/v1740841199/Vivanta_Hyderabad_4_pfk9em.jpg",
+		"https://res.cloudinary.com/dosymlwpq/image/upload/v1740841199/Vivanta_Hyderabad_3_oa5zwg.jpg",
+		"https://res.cloudinary.com/dosymlwpq/image/upload/v1740841198/Vivanta_Hyderabad_2_myh8zc.jpg",
+		"https://res.cloudinary.com/dosymlwpq/image/upload/v1740841198/Vivanta_Hyderabad_1_ehpd5r.jpg"
+	],
+	"createdAt": "2025-03-01T15:01:41.342Z",
+	"updatedAt": "2025-03-01T15:01:41.342Z",
+	"__v": 0
+}, */

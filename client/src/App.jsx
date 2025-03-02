@@ -1,11 +1,20 @@
-import { Route, Routes } from 'react-router'
+import { Navigate, Route, Routes } from 'react-router'
 import './App.css'
 import { LoginPage } from './pages/loginPage/LoginPage'
 import { SignupPage } from './pages/signupPage/SignupPage'
 import { Layout } from './components/layout/Layout'
 import { HomePage } from './pages/homePage/HomePage'
+import { useEffect } from 'react'
+import { isLoggedIn } from './utils/helperFunctions'
 
 function App() {
+
+  function Protected({ children }) {
+    if (!isLoggedIn()) {
+      return <Navigate to="/login" replace />
+    }
+    return children
+  }
 
   return (
     <>
@@ -14,7 +23,9 @@ function App() {
         <Route path="/signup" element={<SignupPage />}></Route>
 
         <Route path='/' element={<Layout />}>
-            <Route path='/' element={<HomePage />} />
+            <Route path='/' element={<Protected>
+              <HomePage />
+            </Protected>} />
         </Route>
 
       </Routes>

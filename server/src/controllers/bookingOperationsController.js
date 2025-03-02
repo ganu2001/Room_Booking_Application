@@ -6,8 +6,9 @@ const searchHotels = async (req, res) => {
 	try {
 		const {query} = req.body;
 
-		if (!query) {
-		return apiErrorResponse(res, 400, "Search query missing")
+		if (!query || query == "") {
+			const hotelsData = await Hotel.find();
+				return apiSuccessResponse(res, 200,"Hotels data fetched successfully",  hotelsData);
 		}
 
 		const hotelSet = new Set();
