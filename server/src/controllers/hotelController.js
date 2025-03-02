@@ -41,8 +41,7 @@ const getHotelData = async (req, res) => {
 			return apiSuccessResponse(res, 200, "Hotel Data fetched", hotelData);
 		}
 		else {
-			const hotelsData = await Hotel.find();
-			return apiSuccessResponse(res, 200,"Hotels data fetched successfully",  hotelsData);
+			return apiErrorResponse(res,500,"hotel id required", error.message)
 		}
 		
 	}

@@ -1,20 +1,41 @@
+import { useNavigate } from "react-router";
 import Styles from "./LoginPage.module.css";
 import { useState } from "react";
+import { login } from "../../services/api";
+import { toast } from "react-toastify";
+import Cookies from 'js-cookie';
+
 
 export const LoginPage = () => {
   const [loginData, setLoginData] = useState({ email: "", password: "" });
+  const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(loginData);
+
+    try {
+      const response = await login(loginData.email, loginData.password);
+      
+      if(response.status == 200) {
+        Cookies.set('userId' , response.data.userData._id);
+        Cookies.set('userName' , response.data.userData.name);
+        Cookies.set('role', response.data.userData.role);
+        toast.success(response.data.message)
+        navigate('/')
+      }
+    } catch (error) {
+      console.error("Error posting data:", error);
+      toast.error(error.response.data.message)
+    }
   };
+
 
   return (
     <div className={Styles.container}>
       <div className={Styles.row}>
         <div className={Styles.left}>
           {/* <img src="/logo.png" className={Styles.logoImg} alt="Logo" /> */}
-		  ROOM
+		          RoomBook
         </div>
         <div className={Styles.right}>
           <div className={Styles.formContainer}>

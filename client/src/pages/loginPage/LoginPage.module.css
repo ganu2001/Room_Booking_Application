@@ -15,13 +15,11 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	background-color: var(--secondary-text);
-	background-color: var(--primary-color);
 }
 
 .right {
 	flex: 5;
-	background-color:var(--primary-color);
+	background-color: var(--primary-text);
 	display: flex;
 	justify-content: center;
 	align-items: center;

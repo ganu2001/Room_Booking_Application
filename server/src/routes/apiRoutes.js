@@ -16,13 +16,13 @@ router.post("/login", loginUser);
 
 // Hotel CRUD 
 router.post("/create-hotel", adminAuthMiddleware, createHotelMiddleware, createHotel);
-router.get("/hotel/:id", userAuthMiddleware, getHotelData)
+router.post("/hotel/:id", userAuthMiddleware, getHotelData)
 router.put("/hotel/:id", adminAuthMiddleware, updateHotelData)
 router.delete("/hotel/:id", adminAuthMiddleware, deleteHotel)
 
 
 // Booking operations
-router.post("/search-hotels", userAuthMiddleware, searchHotels);
+router.post("/get-hotels-list", userAuthMiddleware, searchHotels);
 router.post("/book-hotel", userAuthMiddleware, bookHotel)
 router.post("/get-user-bookings", userAuthMiddleware, getUserBookings)
 // router.post("/getAvailability", userAuthMiddleware, getHotelAvailability)
