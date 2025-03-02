@@ -6,6 +6,7 @@ import { Layout } from './components/layout/Layout'
 import { HomePage } from './pages/homePage/HomePage'
 import { useEffect } from 'react'
 import { isLoggedIn } from './utils/helperFunctions'
+import { HotelInforPage } from './pages/hotelInforPage/HotelInforPage'
 
 function App() {
 
@@ -23,9 +24,16 @@ function App() {
         <Route path="/signup" element={<SignupPage />}></Route>
 
         <Route path='/' element={<Layout />}>
-            <Route path='/' element={<Protected>
-              <HomePage />
-            </Protected>} />
+            <Route path='/' element={
+              <Protected>
+                <HomePage />
+              </Protected>}
+            />
+            <Route path='/hotel/:hotelId' element={
+              <Protected>
+                <HotelInforPage />
+              </Protected>}
+            />
         </Route>
 
       </Routes>

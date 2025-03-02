@@ -15,7 +15,6 @@ export const login = (email, password) => {
 	return res;
 }
 
-
 export const getHotelsList = (searchquery = "") => {
 	const payload = {
 		query: searchquery,
@@ -24,3 +23,12 @@ export const getHotelsList = (searchquery = "") => {
 	const res = axios.post(`${apiUrl}/get-hotels-list`, payload);
 	return res;
 } 
+
+export const getHotelInfo = (hotelId) => {
+	const payload = {
+		hotelId: hotelId,
+		userId: Cookies.get("userId"),
+	}
+	const res = axios.post(`${apiUrl}/hotel`, payload);
+	return res;
+}

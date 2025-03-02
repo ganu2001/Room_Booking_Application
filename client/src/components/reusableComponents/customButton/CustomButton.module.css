@@ -2,12 +2,10 @@
 .outlinedBtn{
 	color:  var(--primary-background) !important;
 	border:  2px solid  var(--primary-background) !important;
-	background-color: white !important;
+	background-color: transparent;
 	border-radius: 20px !important;
 	min-width: 75px;
-	padding: 17px 25px;
-	margin:0.2rem 0.5rem;
-   
+	padding: 17px 25px;   
   }
   
   .filledBtn
@@ -19,7 +17,6 @@
 	min-width: 75px;
 	margin:0.2rem 0.5rem;
 	padding: 17px 25px;
-	margin:0.2rem 3rem;
   }
   
   

@@ -29,7 +29,7 @@ const createHotel = async (req, res) => {
 
 const getHotelData = async (req, res) => {
 	try {
-		const hotelId = req.params.id;
+		const {hotelId} = req.body;
 
 		if(hotelId) {
 			const hotelData = await Hotel.findOne({_id: hotelId})
