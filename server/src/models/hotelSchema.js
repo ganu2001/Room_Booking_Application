@@ -10,7 +10,7 @@ const HotelSchema = new mongoose.Schema(
 	ac_rooms : { type: Number, required: true, default: 0 },
 	non_ac_rooms : { type: Number, required: true, default: 0 },
 	banquet_hall_available: { type: Boolean, required: true, default: false },
-	hotelImages: { type: Array}
+	hotel_images: { type: [String], default: []}
   },
   { timestamps: true }
 );
