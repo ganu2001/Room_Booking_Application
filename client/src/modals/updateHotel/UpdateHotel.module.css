@@ -1,0 +1,14 @@
+.buttonParent {
+	display: flex;
+	gap: 10px;
+}
+
+.formContainer {
+	max-height: 60vh;
+	overflow-y: auto;
+}
+
+.popupFooter {
+	text-align: right;
+	padding: 0px 30px;
+}
