@@ -1,20 +1,12 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom'
-import {Sidebar}  from '../../components/sidebar/Sidebar'
 import {Navbar} from '../../components/navbar/Navbar'
 
-export const PageLayout = () => {
+export const Layout = () => {
   return (
-    <div style={{ display: "flex", flexDirection: "column", height: "100vh" }}>
+    <div style={{ display: "flex", flexDirection: "column", maxHeight: "100vh" }}>
       <Navbar />
-      <div style={{ display: "flex",height:"100%"}}>
-        <div  style={{height:"100%"}}>
-          <Sidebar/>
-        </div>
-        {/* <div className="col m-0 p-0"> */}
-          <Outlet />
-        {/* </div> */}
-      </div>
+      <Outlet />
     </div>
   )
 }
