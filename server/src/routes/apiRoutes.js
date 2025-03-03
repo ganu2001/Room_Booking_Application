@@ -17,8 +17,8 @@ router.post("/login", loginUser);
 // Hotel CRUD 
 router.post("/create-hotel", adminAuthMiddleware, createHotelMiddleware, createHotel);
 router.post("/hotel", userAuthMiddleware, getHotelData)
-router.put("/hotel/:id", adminAuthMiddleware, updateHotelData)
-router.delete("/hotel/:id", adminAuthMiddleware, deleteHotel)
+router.post("/update-hotel", adminAuthMiddleware, updateHotelData)
+router.post("/delete-hotel", adminAuthMiddleware, deleteHotel)
 
 
 // Booking operations

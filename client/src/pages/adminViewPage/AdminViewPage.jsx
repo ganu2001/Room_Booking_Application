@@ -7,12 +7,14 @@ import { useNavigate } from 'react-router';
 import Cookies from 'js-cookie'
 import { toast } from 'react-toastify';
 import { UpdateHotel } from '../../modals/updateHotel/UpdateHotel';
+import { DeleteHotelConfirmationModal } from '../../modals/deleteHotelConfirmationModal/DeleteHotelConfirmationModal';
 
 export const AdminViewPage = () => {
 	const [hotelData, setHotelData] = useState([]);
 	const [serachQuery, setSearchQuery] = useState("");
 	const [particlarHotelData, setParticlarHotelData] = useState()
 	const [updateHotelOpen, setUpdateHotelOpen] = useState(false)
+	const [deleteHotelOpen, setDeleteHotelOpen] = useState(false)
 	const navigate = useNavigate();
 
 	const getHostelList = async(queryString) => {
@@ -32,6 +34,11 @@ export const AdminViewPage = () => {
 	const handleHotelUpdate = (hotel) => {
 		setParticlarHotelData(hotel);
 		setUpdateHotelOpen(true);
+	}
+
+	const hotelHotelDelete = (hotel) => {
+		setParticlarHotelData(hotel);
+		setDeleteHotelOpen(true);
 	}
 
 	useEffect(() => {
@@ -70,7 +77,7 @@ export const AdminViewPage = () => {
 								<div className={`${styles.hotelPrice} ${styles.infodiv}`}>Prices starting from {hotel?.non_ac_room_price ? hotel?.non_ac_room_price : hotel?.ac_room_price}</div>
 								<div className={`${styles.handlehotelDiv} ${styles.infodiv}`}>
 									<CustomButton text='Update' onClick={() => handleHotelUpdate(hotel)} />
-									<CustomButton text='Delete' isFilled={true} />
+									<CustomButton text='Delete' isFilled={true} onClick={() => hotelHotelDelete(hotel)} />
 								</div>
 							</div>
 						</div>
@@ -83,6 +90,14 @@ export const AdminViewPage = () => {
 			isOpen={updateHotelOpen}
 			setIsOpen={setUpdateHotelOpen}
 			hotelData={particlarHotelData}
+			getHostelList={getHostelList}
+		/>
+
+		<DeleteHotelConfirmationModal
+			hotelData={particlarHotelData}
+			getHostelList={getHostelList}
+			isOpen={deleteHotelOpen}
+			setIsOpen={setDeleteHotelOpen}
 		/>
 
 	</div>
