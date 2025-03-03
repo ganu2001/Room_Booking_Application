@@ -52,3 +52,17 @@ export const deleteHotel = (hotelId) => {
 	return res;
 
 }
+
+export const getAvailability = (enteredData, hotelId) => {
+	const payload = {
+		"userId": Cookies.get("userId"),
+		"hotelId": hotelId,
+		"checkInDate": enteredData.checkInDateString,
+		"checkOutDate": enteredData.checkOutDateString,
+		"roomType": enteredData.isRoomTypeAC ? "AC" : "Non-AC",
+		"numberOfRooms": enteredData.roomCount
+	}
+	const res = axios.post(`${apiUrl}/get-availability`, payload);
+	return res;
+
+}

@@ -3,7 +3,7 @@ const {signupUser, loginUser} = require('../controllers/userController');
 const { adminAuthMiddleware, userAuthMiddleware } = require("../middlewares/userAuthMiddleware");
 const { createHotelMiddleware } = require("../middlewares/hotelMiddleware");
 const {createHotel, getHotelData, updateHotelData, deleteHotel} = require("../controllers/hotelController");
-const {searchHotels, bookHotel, getUserBookings} = require("../controllers/bookingOperationsController");
+const {searchHotels, bookHotel, getUserBookings, checkAvailability} = require("../controllers/bookingOperationsController");
 
 const router = express.Router();
 
@@ -25,7 +25,7 @@ router.post("/delete-hotel", adminAuthMiddleware, deleteHotel)
 router.post("/get-hotels-list", userAuthMiddleware, searchHotels);
 router.post("/book-hotel", userAuthMiddleware, bookHotel)
 router.post("/get-user-bookings", userAuthMiddleware, getUserBookings)
-// router.post("/getAvailability", userAuthMiddleware, getHotelAvailability)
+router.post("/get-availability", userAuthMiddleware, checkAvailability)
 
 	
 module.exports = router;
