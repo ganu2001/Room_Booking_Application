@@ -1,0 +1,80 @@
+
+
+
+.bookingSummary {
+	border: 1px solid var(--secondary-border);
+	padding: 5px;
+	border-radius: 10px;
+}
+
+.summaryTab {
+	display: flex;
+	justify-content: space-between;
+	padding: 0px 10px 0px 0px;
+
+}
+
+.summaryContent {
+	width: 49%;
+}
+
+.tableContainer {
+	margin: 10px 0px;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+  
+.th{
+	padding: 8px;
+	padding-left: 15px;
+	text-align: center;
+	border-bottom: 1px solid #DCDEDE;
+	font-size: 14px;
+	align-items: center;
+	font-weight: bold;
+	/* background-color: #f2f2f2; */
+}
+
+.td {
+	padding: 8px;
+	padding-left: 15px;
+	text-align: left;
+	border-bottom: 1px solid #DCDEDE;
+	font-weight: 400;
+	font-size: 14px;
+	align-items: center;
+	justify-content: center;
+}
+  
+.td {
+	padding: 5px;
+	text-align: center;
+}
+
+.headRow .th:first-child
+{
+	border-top-left-radius: 9px;
+}
+
+.headRow .th:last-child 
+{
+	border-top-right-radius: 9px;
+}
+
+.lastRow .totalRow:first-child
+{
+	border-bottom-left-radius: 8px;
+}
+
+.lastRow .totalRow:last-child
+{
+	border-bottom-right-radius: 8px;
+}
+
+
+.modlaFooter {
+	text-align: right;
+}

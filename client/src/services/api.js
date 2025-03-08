@@ -66,3 +66,13 @@ export const getAvailability = (enteredData, hotelId) => {
 	return res;
 
 }
+
+export const bookHotel = (bookingData) => {
+	const payload = {
+		"userId": Cookies.get("userId"),
+		...bookingData		
+	}
+	const res = axios.post(`${apiUrl}/book-hotel`, payload);
+	return res;
+
+}

@@ -6,6 +6,10 @@ import { Carousel, Switch } from 'antd';
 import { DynamicInputComponent } from '../../components/reusableComponents/dynamicInputComponent/DynamicInputComponent';
 import { CustomButton } from '../../components/reusableComponents/customButton/CustomButton';
 import { toast } from 'react-toastify';
+import { DeleteHotelConfirmationModal } from '../../modals/deleteHotelConfirmationModal/DeleteHotelConfirmationModal';
+import { HotelBookModal } from '../../modals/hotelBookModal/HotelBookModal';
+import { BookingConfirmModal } from '../../modals/bookingConfirmModal/BookingConfirmModal';
+import { calculateAdvance } from '../../utils/helperFunctions';
 
 export const HotelInforPage = () => {
 	const [hotelData, setHotelData] = useState(null)
@@ -22,6 +26,9 @@ export const HotelInforPage = () => {
 		isCompleteAvailable : false,
 		availableDates: []
 	})
+	const [confirmAndBookOpen, setConfirmAndBookOpen] = useState(false);	
+	const [bookingConfirmOpen, setBookingConfirmOpen] = useState(false);	
+	
 
 	const getCurrentHotelInfo = async (hotelId) => {
 		try {
@@ -78,6 +85,7 @@ export const HotelInforPage = () => {
 				isCompleteAvailable : completAvailable,
 				availableDates: availableDates
 			})
+			setConfirmAndBookOpen(true);
 
 			console.log(res, 'res check');
 		} catch (err) {
@@ -190,7 +198,24 @@ export const HotelInforPage = () => {
 				<CustomButton text='Get Availability' isFilled={true} onClick={handleCheckAvailability} />
 			</div>
 
+			<HotelBookModal
+				isOpen={confirmAndBookOpen}
+				setIsOpen={setConfirmAndBookOpen}
+				hotelAvailableData={hotelAvailableData}
+				hotelData={hotelData}
+				availabilityInputData={availabilityInputData}
+				setBookingConfirmOpen={setBookingConfirmOpen}
+			/>
 
+			<BookingConfirmModal
+				hotelId = {hotelData?._id}
+				bookingData={availabilityInputData}
+				isOpen={bookingConfirmOpen}
+				setIsOpen={setBookingConfirmOpen}
+				advanceAmount={availabilityInputData?.isRoomTypeAC ? calculateAdvance(availabilityInputData?.roomCount * hotelData?.ac_room_price * hotelAvailableData?.availableDates.length): calculateAdvance(availabilityInputData?.roomCount * hotelData?.non_ac_room_price * hotelAvailableData?.availableDates.length)}
+			/>
+
+			
 		</div>
 	</div>
   )
