@@ -51,8 +51,9 @@ const getHotelData = async (req, res) => {
 }
 
 const updateHotelData = async (req, res) => {
+	const hotelId = req.body.hotelId;
+	
 	try {
-		const hotelId = req.params.id;
 		
 		if(!hotelId) {
 			return apiErrorResponse(res, 400, "Hotel Id required")
@@ -75,7 +76,7 @@ const updateHotelData = async (req, res) => {
 
 const deleteHotel = async (req, res) => {
 	try {
-		const hotelId = req.params.id;
+		const hotelId = req.body.hotelId;
 		
 		if(!hotelId) {
 			return apiErrorResponse(res, 400, "Hotel Id required")

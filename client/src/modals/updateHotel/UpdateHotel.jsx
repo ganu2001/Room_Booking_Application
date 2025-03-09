@@ -3,8 +3,10 @@ import React, { useEffect, useState } from 'react'
 import { DynamicInputComponent } from '../../components/reusableComponents/dynamicInputComponent/DynamicInputComponent'
 import styles from './UpdateHotel.module.css'
 import { CustomButton } from '../../components/reusableComponents/customButton/CustomButton'
+import { toast } from "react-toastify";
+import { updateHotelData } from '../../services/api'
 
-export const UpdateHotel = ({isOpen, setIsOpen, hotelData}) => {
+export const UpdateHotel = ({isOpen, setIsOpen, hotelData, getHostelList}) => {
 	
 	const [updatFormData, setUpdateFormData] = useState()
 	
@@ -13,8 +15,18 @@ export const UpdateHotel = ({isOpen, setIsOpen, hotelData}) => {
 		setUpdateFormData(null);
 	}
 
-	const handleUpdate = () => {
+	const handleUpdate = async() => {
 		console.log("updated data", updatFormData);
+		try {
+			const updatedHotelData = {...updatFormData, hotelId: hotelData._id};
+			const res = await updateHotelData(updatedHotelData);
+			toast.success(res.data.message)
+			await getHostelList()
+			handleCancel();
+		} catch (err) {
+			console.error(err);
+			toast.error(err?.response?.data.message)
+		}
 	}
 
 	useEffect(() => {

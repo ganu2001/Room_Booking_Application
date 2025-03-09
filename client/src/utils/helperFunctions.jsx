@@ -18,3 +18,23 @@ export const isAdminLoggedIn = () => {
         return false;
     }
 }
+
+export const calculateTax = (price) => {
+    return Math.round(price * 0.05);
+}
+
+export const calculateTotal = (price) => {
+    return Math.round(price + (price * 0.05));
+}
+
+
+export const calculateAdvance = (price) => {
+    const totalPrice = price + (price * 0.05)
+    return Math.round(totalPrice * 0.3);
+}
+
+export const calculateCheckout = (price) => {
+    const totalPrice = price + (price * 0.05)
+    return Math.round(totalPrice * 0.7);
+}
+

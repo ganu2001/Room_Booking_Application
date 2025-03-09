@@ -10,7 +10,7 @@
   
   .filledBtn
   {
-	color: var(--primary-text) !important;
+	color: var(--secondary-text) !important;
 	border:  2px solid  var(--primary-background)!important;
 	background-color: var(--primary-background)!important;
 	border-radius: 20px !important;
