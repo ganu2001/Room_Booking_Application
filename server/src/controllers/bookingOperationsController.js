@@ -6,8 +6,9 @@ const searchHotels = async (req, res) => {
 	try {
 		const {query} = req.body;
 
-		if (!query) {
-		return apiErrorResponse(res, 400, "Search query missing")
+		if (!query || query == "") {
+			const hotelsData = await Hotel.find();
+				return apiSuccessResponse(res, 200,"Hotels data fetched successfully",  hotelsData);
 		}
 
 		const hotelSet = new Set();
@@ -95,7 +96,63 @@ const getUserBookings = async (req, res) => {
 	catch (error) {
 		return apiErrorResponse(res,500,"Internal Server Error", error.message)
 	}
+}
+
+const checkAvailability = async (req, res) => {
+	try {
+		const { hotelId, checkInDate, checkOutDate, numberOfRooms, roomType } = req.body;
+		
+		if (!hotelId || !checkInDate || !checkOutDate || !numberOfRooms || !roomType) {
+			return apiErrorResponse(res,400, "Required Fields missing");
+		}
+
+		const hotel = await Hotel.findOne({_id: hotelId});
+		if(!hotel) {
+			return apiErrorResponse(res,404,"Hotel not found");
+		}
+
+		const totalRooms = roomType == "AC" ? hotel.ac_rooms : hotel.non_ac_rooms;
+		const startDt = new Date(checkInDate);
+    	const endDt = new Date(checkOutDate);
+
+		let dateAvailability = {};
+
+		for (let d = new Date(startDt); d <= endDt; d.setDate(d.getDate() + 1)) {
+		dateAvailability[d.toISOString().split("T")[0]] = totalRooms;
+		}
+
+		const bookings = await Booking.find({
+		hotelId,
+		roomType,
+		status: "Confirmed",
+		$or: [
+			{ checkInDate: { $lte: endDt }, checkOutDate: { $gte: startDt } },
+		],
+		});
+
+		bookings.forEach((booking) => {
+		let checkIn = new Date(booking.checkInDate);
+		let checkOut = new Date(booking.checkOutDate);
+		for (let d = new Date(checkIn); d <= checkOut; d.setDate(d.getDate() + 1)) {
+			let dateStr = d.toISOString().split("T")[0];
+			if (dateAvailability[dateStr] !== undefined) {
+			dateAvailability[dateStr] -= booking.numberOfRooms;
+			}
+		}
+		});
+
+		let availability = Object.keys(dateAvailability).map((date) => ({
+			date,
+			availableRooms: dateAvailability[date],
+			available: dateAvailability[date] >= numberOfRooms
+		}));
+
+		return apiSuccessResponse(res, 200, "Availability fetched successful", availability);		
+	}
+	catch (error) {
+		return apiErrorResponse(res,500,"Internal Server Error", error.message)
+	}
 } 
 
 
-module.exports = {searchHotels, bookHotel, getUserBookings}
+module.exports = {searchHotels, bookHotel, getUserBookings, checkAvailability}

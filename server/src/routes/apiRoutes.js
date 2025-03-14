@@ -3,7 +3,7 @@ const {signupUser, loginUser} = require('../controllers/userController');
 const { adminAuthMiddleware, userAuthMiddleware } = require("../middlewares/userAuthMiddleware");
 const { createHotelMiddleware } = require("../middlewares/hotelMiddleware");
 const {createHotel, getHotelData, updateHotelData, deleteHotel} = require("../controllers/hotelController");
-const {searchHotels, bookHotel, getUserBookings} = require("../controllers/bookingOperationsController");
+const {searchHotels, bookHotel, getUserBookings, checkAvailability} = require("../controllers/bookingOperationsController");
 
 const router = express.Router();
 
@@ -16,16 +16,16 @@ router.post("/login", loginUser);
 
 // Hotel CRUD 
 router.post("/create-hotel", adminAuthMiddleware, createHotelMiddleware, createHotel);
-router.get("/hotel/:id", userAuthMiddleware, getHotelData)
-router.put("/hotel/:id", adminAuthMiddleware, updateHotelData)
-router.delete("/hotel/:id", adminAuthMiddleware, deleteHotel)
+router.post("/hotel", userAuthMiddleware, getHotelData)
+router.post("/update-hotel", adminAuthMiddleware, updateHotelData)
+router.post("/delete-hotel", adminAuthMiddleware, deleteHotel)
 
 
 // Booking operations
-router.post("/search-hotels", userAuthMiddleware, searchHotels);
+router.post("/get-hotels-list", userAuthMiddleware, searchHotels);
 router.post("/book-hotel", userAuthMiddleware, bookHotel)
 router.post("/get-user-bookings", userAuthMiddleware, getUserBookings)
-// router.post("/getAvailability", userAuthMiddleware, getHotelAvailability)
+router.post("/get-availability", userAuthMiddleware, checkAvailability)
 
 	
 module.exports = router;

@@ -29,7 +29,7 @@ const createHotel = async (req, res) => {
 
 const getHotelData = async (req, res) => {
 	try {
-		const hotelId = req.params.id;
+		const {hotelId} = req.body;
 
 		if(hotelId) {
 			const hotelData = await Hotel.findOne({_id: hotelId})
@@ -41,8 +41,7 @@ const getHotelData = async (req, res) => {
 			return apiSuccessResponse(res, 200, "Hotel Data fetched", hotelData);
 		}
 		else {
-			const hotelsData = await Hotel.find();
-			return apiSuccessResponse(res, 200,"Hotels data fetched successfully",  hotelsData);
+			return apiErrorResponse(res,500,"hotel id required", error.message)
 		}
 		
 	}
@@ -52,8 +51,9 @@ const getHotelData = async (req, res) => {
 }
 
 const updateHotelData = async (req, res) => {
+	const hotelId = req.body.hotelId;
+	
 	try {
-		const hotelId = req.params.id;
 		
 		if(!hotelId) {
 			return apiErrorResponse(res, 400, "Hotel Id required")
@@ -76,7 +76,7 @@ const updateHotelData = async (req, res) => {
 
 const deleteHotel = async (req, res) => {
 	try {
-		const hotelId = req.params.id;
+		const hotelId = req.body.hotelId;
 		
 		if(!hotelId) {
 			return apiErrorResponse(res, 400, "Hotel Id required")
