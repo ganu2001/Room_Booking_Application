@@ -4,12 +4,12 @@ import { CustomButton } from '../../components/reusableComponents/customButton/C
 import { bookHotel } from '../../services/api';
 import { toast } from 'react-toastify';
 
-export const BookingConfirmModal = ({isOpen, setIsOpen, hotelId, bookingData, advanceAmount}) => {
-	
+export const BookingConfirmModal = ({ isOpen, setIsOpen, hotelId, bookingData, advanceAmount }) => {
+
 	const handleCancel = () => {
 		setIsOpen(false);
 	}
-	const handleBook = async() => {
+	const handleBook = async () => {
 		const bookingDataPaylod = {
 			"hotelId": hotelId,
 			"roomType": bookingData.isRoomTypeAC ? "AC" : "Non-AC",
@@ -29,7 +29,7 @@ export const BookingConfirmModal = ({isOpen, setIsOpen, hotelId, bookingData, ad
 
 	}
 
-  	return (
+	return (
 		<Modal
 			title={<span style={{ color: 'black', fontWeight: '500', fontSize: '20px' }}>Confirm Booking</span>}
 			open={isOpen}
@@ -37,13 +37,15 @@ export const BookingConfirmModal = ({isOpen, setIsOpen, hotelId, bookingData, ad
 			width={'60%'}
 			footer={null}
 		>
-			Please confirm if you want to book the rooms for specified dates?
-
-			<div style={{textAlign: "right"}}>
+			For confirm your Room pay 4000 in Advance.
+			<div>
+				<img src="/./assets/QR_CODE" alt="Room Preview" />
+			</div>
+			<div style={{ textAlign: "right" }}>
 				<CustomButton text='Cancel' />
 				<CustomButton text='Confirm' isFilled={true} onClick={handleBook} />
 			</div>
-			
+
 		</Modal>
-  )
+	)
 }
