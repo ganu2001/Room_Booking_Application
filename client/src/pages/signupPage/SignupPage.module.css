@@ -80,7 +80,7 @@
 	background-color:var(--primary-background);
 }
   
-.signupPage {
+.loginPage {
 	cursor: pointer;
 	margin: 0.5rem 0rem;
 	color: var(--primary-background);
