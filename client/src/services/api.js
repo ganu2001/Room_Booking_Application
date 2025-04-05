@@ -15,6 +15,19 @@ export const login = (email, password) => {
 	return res;
 }
 
+export const signup = (name, email, password, mobile) => {
+	const payload = {
+			"name": name,
+			"email": email,
+			"password": password,
+			"mobileNo": mobile,
+			"role": "user"
+
+		}
+	const res = axios.post(`${apiUrl}/signup`, payload);
+	return res;
+}
+
 export const getHotelsList = (searchquery = "") => {
 	const payload = {
 		query: searchquery,

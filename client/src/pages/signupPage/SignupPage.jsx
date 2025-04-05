@@ -1,9 +1,12 @@
 import { toast } from "react-toastify";
 import Styles from "./SignupPage.module.css";
 import { useState } from "react";
+import { signup } from "../../services/api";
+import { useNavigate } from 'react-router';
 
 export const SignupPage = () => {
   const [signupData, setSignupData] = useState({name: "", email: "", mobile:"",  password: "", retypePassword: "",  });
+  const navigate = useNavigate();
 
   const handleSubmit = async(e) => {
 	e.preventDefault();
@@ -11,21 +14,16 @@ export const SignupPage = () => {
 		toast.error("All fields are necessary");
 		return;
 	}
-	if(signupData.password != setSignupData.retypePassword) {
+	if(signupData.password != signupData.retypePassword) {
 		toast.error("Passwords not matching");
 		return;	
 	}
 
 	try {
-		const response = await login(loginData.email, loginData.password);
-		
-		if(response.status == 200) {
-		Cookies.set('userId' , response.data.userData._id);
-		Cookies.set('userName' , response.data.userData.name);
-		Cookies.set('role', response.data.userData.role);
-		toast.success(response.data.message)
-		navigate('/')
-		}
+		const response = await signup(signupData.name, signupData.email, signupData.password, signupData.mobile);
+		toast.success(response?.data?.message)
+		setSignupData({name: "", email: "", mobile:"",  password: "", retypePassword: ""});
+		navigate('/login')
 	} catch (error) {
 		console.error("Error posting data:", error);
 		toast.error(error.response.data.message)
@@ -33,6 +31,10 @@ export const SignupPage = () => {
 
 	console.log(signupData)
   };
+
+  const redirectToSignup = () => {
+    navigate("/login");
+  }
 
   return (
 	<div className={Styles.container}>
@@ -43,7 +45,7 @@ export const SignupPage = () => {
 		</div>
 		<div className={Styles.right}>
 		  <div className={Styles.formContainer}>
-			<div className={Styles.heading}>Login</div>
+			<div className={Styles.heading}>Sign up</div>
 
 			<form onSubmit={handleSubmit} className={Styles.formSection}>
 			  <div className={Styles.inputGroup}>
@@ -96,6 +98,10 @@ export const SignupPage = () => {
 				  }
 				/>
 			  </div>
+
+			  <div className={Styles.loginPage} onClick={redirectToSignup}>
+					Already a user? Login.
+				</div>
 
 			  <button type="submit" className={Styles.btn}>
 				Submit
