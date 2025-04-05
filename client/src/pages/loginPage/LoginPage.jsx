@@ -29,6 +29,10 @@ export const LoginPage = () => {
     }
   };
 
+  const redirectToSignup = () => {
+    navigate("/signup")
+  }
+
 
   return (
     <div className={Styles.container}>
@@ -61,6 +65,10 @@ export const LoginPage = () => {
                     setLoginData({ ...loginData, password: e.target.value })
                   }
                 />
+              </div>
+
+              <div className={Styles.signupPage} onClick={redirectToSignup}>
+                Not a user? create an account.
               </div>
 
               <button type="submit" className={Styles.btn}>

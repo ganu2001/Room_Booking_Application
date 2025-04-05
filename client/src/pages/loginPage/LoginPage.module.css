@@ -19,7 +19,7 @@
 
 .right {
 	flex: 5;
-	background-color: var(--primary-text);
+	background-color: var(--secondary-text);
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -80,3 +80,8 @@
 	background-color:var(--primary-background);
 }
   
+.signupPage {
+	cursor: pointer;
+	margin: 0.5rem 0rem;
+	color: var(--primary-background);
+}
