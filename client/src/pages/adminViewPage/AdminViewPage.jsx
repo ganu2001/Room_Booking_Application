@@ -42,6 +42,7 @@ export const AdminViewPage = () => {
 	}
 
 	useEffect(() => {
+		console.log("called");
 		if(Cookies.get("role") != "admin") {
 			toast.info("Admin access required");
 			navigate('/');

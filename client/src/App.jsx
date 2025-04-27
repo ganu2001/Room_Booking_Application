@@ -12,10 +12,18 @@ import { AdminViewPage } from './pages/adminViewPage/AdminViewPage'
 function App() {
 
   function Protected({ children }) {
-    if (!isLoggedIn()) {
+    const res = isLoggedIn();
+    console.log("----", res)
+    if (res == "Logged out") {
       return <Navigate to="/login" replace />
     }
-    return children
+    // else if (res == "admin") {
+    //   // return <Navigate to="/adminView" replace />
+    //   navigate("/adminView")
+    // }
+    // else {
+      return children;
+    // }
   }
 
   return (

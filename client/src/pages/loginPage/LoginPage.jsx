@@ -20,8 +20,13 @@ export const LoginPage = () => {
         Cookies.set('userId' , response.data.userData._id);
         Cookies.set('userName' , response.data.userData.name);
         Cookies.set('role', response.data.userData.role);
+        if(response.data.userData.role == "admin") {
+          navigate('/adminView');
+        }
+        else {
+          navigate('/')
+        }
         toast.success(response.data.message)
-        navigate('/')
       }
     } catch (error) {
       console.error("Error posting data:", error);
