@@ -2,10 +2,16 @@ import Cookies from 'js-cookie';
 
 export const isLoggedIn = () => {
     const accessToken = Cookies.get("userId");
+    const role = Cookies.get("role");
     if (accessToken) {
-        return true;
+        if(role == 'admin') {
+            return "admin";
+        }
+        else {
+            return "user";
+        }
     } else {
-        return false;
+        return "Logged out";
     }
 }
 
